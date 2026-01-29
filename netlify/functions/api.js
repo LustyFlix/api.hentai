@@ -5,6 +5,11 @@ const serverless = require('serverless-http');
 const app = express();
 app.use(express.json());
 
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+
 const apiRoutes = require('../../src/routes/api');
 
 app.use('/', apiRoutes);
