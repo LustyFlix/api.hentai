@@ -7,7 +7,7 @@ app.use(express.json());
 
 const apiRoutes = require('../../src/routes/api');
 
-app.use('/api', apiRoutes);
+app.use('/', apiRoutes);
 
 app.get('/docs', (req, res) => {
   res.json(require('../../public/docs/docs.json'));
