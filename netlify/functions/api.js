@@ -5,23 +5,16 @@ const serverless = require('serverless-http');
 const app = express();
 app.use(express.json());
 
+/* ✅ TEST ROUTE — MUST BE FIRST */
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ status: 'ok', source: 'netlify-function' });
 });
 
-
+/* routes */
 const apiRoutes = require('../../src/routes/api');
-
 app.use('/', apiRoutes);
 
-app.get('/docs', (req, res) => {
-  res.json(require('../../public/docs/docs.json'));
-});
-
-app.get('/docs/genre', (req, res) => {
-  res.json(require('../../public/docs/genre.json'));
-});
-
+/* ❌ 404 — MUST BE LAST */
 app.use((req, res) => {
   res.status(404).json({
     status: 'error',
